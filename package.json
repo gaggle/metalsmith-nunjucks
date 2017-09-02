@@ -1,0 +1,13 @@
+{
+  "name": "metalsmith-nunjucks",
+  "version": "0.0.0",
+  "description": "Metalsmith plugin to resolve Nunjucks tags in files.",
+  "main": "lib/index.js",
+  "author": "Jon Lauridsen <mail@jonlauridsen.com>",
+  "license": "ISC",
+  "dependencies": {
+    "is-utf8": "^0.2.1",
+    "multimatch": "^2.1.0",
+    "nunjucks-tags": "git+https://github.com/gaggle/nunjucks-tags.git"
+  }
+}
