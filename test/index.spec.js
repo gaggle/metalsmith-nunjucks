@@ -10,6 +10,10 @@ describe('metalsmith-nunjucks', function () {
     nunjucks({})
   })
 
+  it('initialises with undefined extensions', function () {
+    nunjucks({}, undefined)
+  })
+
   it('calls extensions on initialisation', function (done) {
     nunjucks({}, () => done())
   })
