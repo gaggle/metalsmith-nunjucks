@@ -3,11 +3,38 @@
   "version": "0.0.0",
   "description": "Metalsmith plugin to resolve Nunjucks tags in files.",
   "main": "lib/index.js",
+  "scripts": {
+    "test": "npm run _test && nyc report --reporter=html",
+    "test:ci": "npm run _test && nyc report --reporter=lcov > coverage.lcov && codecov",
+    "lint:fix": "standard --fix",
+    "lint:code": "codeclimate analyze",
+    "_test": "standard && nyc --all mocha"
+  },
   "author": "Jon Lauridsen <mail@jonlauridsen.com>",
   "license": "ISC",
   "dependencies": {
     "is-utf8": "^0.2.1",
     "multimatch": "^2.1.0",
     "nunjucks-tags": "git+https://github.com/gaggle/nunjucks-tags.git"
+  },
+  "devDependencies": {
+    "codecov": "^2.3.0",
+    "mocha": "^3.5.0",
+    "nyc": "^11.1.0",
+    "standard": "^10.0.3"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "lib/**/*.js",
+      "test/**/*.js"
+    ],
+    "exclude": [
+      "**/*.spec.js"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ]
   }
 }
