@@ -82,4 +82,7 @@ const customTags = function (nunjucks) {
   nunjucks.register('file_keys_tag', function () {
     return Object.keys(this.file)
   })
+  nunjucks.register('files_keys_tag', function () {
+    return Object.keys(this.files)
+  })
 }
