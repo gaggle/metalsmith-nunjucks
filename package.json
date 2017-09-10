@@ -4,6 +4,7 @@
   "description": "Metalsmith plugin to resolve Nunjucks tags in files.",
   "main": "lib/index.js",
   "scripts": {
+    "clean": "rm -rf test/fixtures/**/build",
     "test": "npm run _test && nyc report --reporter=html",
     "test:ci": "npm run _test && nyc report --reporter=lcov > coverage.lcov && codecov",
     "lint:fix": "standard --fix",
@@ -18,7 +19,10 @@
     "nunjucks-tags": "git+https://github.com/gaggle/nunjucks-tags.git"
   },
   "devDependencies": {
+    "assert-dir-equal": "^1.1.0",
     "codecov": "^2.3.0",
+    "lodash.merge": "^4.6.0",
+    "metalsmith": "^2.3.0",
     "mocha": "^3.5.0",
     "nyc": "^11.1.0",
     "standard": "^10.0.3"
