@@ -1,7 +1,6 @@
 /* global describe, it */
 const assert = require('assert')
 const assertDir = require('assert-dir-equal')
-const merge = require('lodash.merge')
 const Metalsmith = require('metalsmith')
 const path = require('path')
 
@@ -38,27 +37,25 @@ describe('metalsmith-nunjucks', function () {
     })
   })
 
+  it('handles render-error', function (done) {
+    const fixture = expandFixture('render-error')
+    buildMetalsmith(fixture.src, fixture.dst, [{}])
+      .catch(err => done())
+  })
+
   it('renders with per-file context', function () {
-    return assertMetalsmithBuildEquals('per-file-context', {}, customTags)
+    const fixture = expandFixture('per-file-context')
+
+    return buildMetalsmith(fixture.src, fixture.dst, [{}, customTags])
+      .then(() => {
+        return assertDir(fixture.dst, fixture.expected, {filter: () => true})
+      })
   })
 })
 
 const assertRun = function (opts, callback) {
   const instance = nunjucks(opts)
   instance({}, {}, callback)
-}
-
-const assertMetalsmithBuildEquals = function (fixture, opts, ...extensions) {
-  const dir = path.resolve(path.join('test', 'fixtures', fixture))
-  opts = merge({}, opts)
-
-  let src = path.join(dir, 'source')
-  let dst = path.join(dir, 'build')
-  let expected = path.join(dir, 'expected')
-  return buildMetalsmith(src, dst, [opts, ...extensions])
-    .then(function () {
-      assertDir(dst, expected, {filter: () => true})
-    })
 }
 
 const buildMetalsmith = function (src, dst, nunjucksArgs) {
@@ -85,4 +82,13 @@ const customTags = function (nunjucks) {
   nunjucks.register('files_keys_tag', function () {
     return Object.keys(this.files)
   })
+}
+
+const expandFixture = function (fixture) {
+  const dir = path.resolve(path.join('test', 'fixtures', fixture))
+
+  let src = path.join(dir, 'source')
+  let dst = path.join(dir, 'build')
+  let expected = path.join(dir, 'expected')
+  return {src, dst, expected}
 }

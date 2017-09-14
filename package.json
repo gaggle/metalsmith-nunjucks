@@ -21,7 +21,6 @@
   "devDependencies": {
     "assert-dir-equal": "^1.1.0",
     "codecov": "^2.3.0",
-    "lodash.merge": "^4.6.0",
     "metalsmith": "^2.3.0",
     "mocha": "^3.5.0",
     "nyc": "^11.1.0",
