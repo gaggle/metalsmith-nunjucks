@@ -48,7 +48,7 @@ describe('metalsmith-nunjucks', function () {
 
     return buildMetalsmith(fixture.src, fixture.dst, [{}, customTags])
       .then(() => {
-        return assertDir(fixture.dst, fixture.expected, {filter: () => true})
+        return assertDir(fixture.dst, fixture.expected)
       })
   })
 })
@@ -77,10 +77,10 @@ const customTags = function (nunjucks) {
     return this.filename
   })
   nunjucks.register('file_keys_tag', function () {
-    return Object.keys(this.file)
+    return Object.keys(this.file).sort()
   })
   nunjucks.register('files_keys_tag', function () {
-    return Object.keys(this.files)
+    return Object.keys(this.files).sort()
   })
 }
 
