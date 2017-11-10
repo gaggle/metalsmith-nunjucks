@@ -40,7 +40,7 @@ describe('metalsmith-nunjucks', function () {
   it('handles render-error', function (done) {
     const fixture = expandFixture('render-error')
     buildMetalsmith(fixture.src, fixture.dst, [{}])
-      .catch(err => done())
+      .catch(err => { if (err) done() })
   })
 
   it('renders with per-file context', function () {
